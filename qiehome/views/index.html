@@ -1,0 +1,31 @@
+<%-include include/header.html%>
+<div style="overflow: hidden">
+    <%articles.forEach(function(article, index){%>
+    <a href="/article/detail?id=<%=article._id%>">
+        <div class="panel panel-default" style="float: left;width: 300px;margin: 10px 39px;">
+            <div class="panel-body">
+                <h4 class="media-heading" align="center"><%=article.title%></h4>
+                <%if(article.poster){%>
+                    <img style='width: 100%;height: 100%;' src="<%=article.poster%>" alt=""/>
+                <%}%>
+            </div>
+            <div class="panel-footer">
+                <span>作者：<%=article.user.username%></span>
+                <br/>
+                <span>时间：<%=article.createAt.toLocaleString()%></span>
+            </div>
+        </div>
+    </a>
+    <%})%>
+</div>
+<!--页码区域-->
+
+<ul class="pagination" style="display:inline-block;margin: 50px auto;">
+    <li><a href="/?keyword=<%=keyword%>&pageNum=<%=(pageNum>1?pageNum-1:1)%>&pageSize=<%=pageSize%>"  aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    <%for(var i=1;i<=totalPage;i++){%>
+        <li><a href="/?keyword=<%=keyword%>&pageNum=<%=i%>&pageSize=<%=pageSize%>"><%=i%></a></li>
+    <%}%>
+
+    <li><a href="/?keyword=<%=keyword%>&pageNum=<%=(pageNum<totalPage?pageNum+1:totalPage)%>&pageSize=<%=pageSize%>"  aria-label="Next"><span aria-hidden="true">&laquo;</span></a></li>
+</ul>
+<%-include include/footer.html%>
